@@ -34,7 +34,7 @@ jobs:
           nmake TARGET_CPU=amd64 BUILD=release SHARED=0 DIR_SUFFIX_CPU= -f makefile.vc
 
       - run: |
-          git clone -–depth 1 git@github.com:erlang/otp.git
+          git clone --depth 1 git@github.com:erlang/otp.git
           cd otp
           export ERL_TOP=`pwd`
           eval `./otp_build env_win32 x64`
