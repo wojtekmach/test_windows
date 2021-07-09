@@ -7,8 +7,7 @@ jobs:
     steps:
       - run: echo $SHELL
         shell: bash
-      - run: echo $SHELL
-        shell: C:\Windows\System32\bash.exe
       - run: make -v
         shell: bash
       - run: make -v
+      - run: echo $SHELL
