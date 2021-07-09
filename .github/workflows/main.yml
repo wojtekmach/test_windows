@@ -9,9 +9,28 @@ jobs:
     #     shell: bash
     # env:
     #   WXWIDGETS_VERSION: 3.1.4
+    defaults:
+      run:
+        shell: wsl-bash {0}
     steps:
-      - run: ls /mnt
-        shell: bash
+      - uses: Vampire/setup-wsl@v1
+      - run: ls -la
+      - run: |
+          mkdir cache
+          cd cache
+          touch a
+          touch b
+        uses: actions/cache@v2
+        with:
+          path: cache
+          key: cache-v1
+
+      # - name: Cache wxWidgets
+      #   id: wxwidgets-cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: wxWidgets
+      #     key: wxWidgets-${{ env.WXWIDGETS_VERSION }}-${{ runner.os }}-v1
       # - name: Cache wxWidgets
       #   id: wxwidgets-cache
       #   uses: actions/cache@v2
