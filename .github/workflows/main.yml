@@ -35,7 +35,9 @@ jobs:
 
       - run: ls -la
       - run: ls -la /
-      - run: ls -la /mingw64
+      - run: ls -la /dev
+      - run: ls -la /cmd
+      - run: ls -la /usr
 
       # - run: |
       #     git clone --depth 1 https://github.com/erlang/otp.git
