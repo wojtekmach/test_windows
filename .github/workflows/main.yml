@@ -26,9 +26,11 @@ jobs:
           # sed -i -r -e 's/wxUSE_WEBVIEW_EDGE +0/wxUSE_WEBVIEW_EDGE 1/' wxWidgets/include/wx/msw/setup.h
 
       - name: Build wxWidgets
+        if: steps.wxwidgets-cache.outputs.cache-hit != 'true'
         shell: cmd
         run: |
           cd wxWidgets\\build\\msw
           call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\Auxiliary\\Build\\vcvars64.bat"
           nmake TARGET_CPU=amd64 BUILD=release SHARED=0 DIR_SUFFIX_CPU= -f makefile.vc
-          wx-config --version
+
+      - run: find . -name "wx-config.*"
