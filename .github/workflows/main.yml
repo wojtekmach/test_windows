@@ -3,19 +3,33 @@ on:
 
 jobs:
   test:
+    runs-on: windows-latest
     defaults:
       run:
         shell: bash
-    runs-on: windows-latest
+    env:
+      WXWIDGETS_VERSION: 3.1.4
     steps:
-      - run: |
-          curl -LO https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.4/wxWidgets-3.1.4.zip
+      - name: Cache wxWidgets
+        id: wxwidgets-cache
+        uses: actions/cache@v2
+        with:
+          path: wxWidgets
+          key: wxWidgets-${{ env.WXWIDGETS_VERSION }}-${{ runner.os }}-v1
+
+      - name: Download wxWidgets
+        if: steps.wxwidgets-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -LO https://github.com/wxWidgets/wxWidgets/releases/download/v${{ env.WXWIDGETS_VERSION }}/wxWidgets-${{ env.WXWIDGETS_VERSION }}.zip
           unzip wxWidgets-3.1.4.zip -d wxWidgets
           sed -i -r -e 's/wxUSE_POSTSCRIPT +0/wxUSE_POSTSCRIPT 1/' wxWidgets/include/wx/msw/setup.h
-          # sed -i -r -e 's/wxUSE_WEBVIEW_EDGE +0/wxUSE_WEBVIEW_EDGE 1/' wxWidgets/include/wx/msw/setup.h
+          sed -i -r -e 's/wxUSE_WEBVIEW_EDGE +0/wxUSE_WEBVIEW_EDGE 1/' wxWidgets/include/wx/msw/setup.h
       - name: Build wxWidgets
         shell: cmd
         run: |
           cd wxWidgets\\build\\msw
           call "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\VC\Auxiliary\\Build\\vcvars64.bat"
           nmake TARGET_CPU=amd64 BUILD=release SHARED=0 DIR_SUFFIX_CPU= -f makefile.vc
+      - run: ls wxWidgets
+      - run: ls wxWidgets/build
+      - run: ls wxWidgets/build/msw
