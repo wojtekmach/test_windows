@@ -16,15 +16,15 @@ jobs:
       - uses: Vampire/setup-wsl@v1
       - run: ls -la
       - uses: actions/cache@v2
+        with:
+          path: cache
+          key: cache-v1
       - run: ls -la
       - run: |
           mkdir cache
           cd cache
           touch a
           touch b
-        with:
-          path: cache
-          key: cache-v1
 
       # - name: Cache wxWidgets
       #   id: wxwidgets-cache
