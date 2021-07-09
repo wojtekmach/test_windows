@@ -11,6 +11,7 @@ jobs:
     #   WXWIDGETS_VERSION: 3.1.4
     steps:
       - run: ls /mnt
+        shell: bash
       # - name: Cache wxWidgets
       #   id: wxwidgets-cache
       #   uses: actions/cache@v2
