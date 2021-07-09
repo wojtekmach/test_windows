@@ -10,8 +10,7 @@ jobs:
     # env:
     #   WXWIDGETS_VERSION: 3.1.4
     steps:
-      - run: uname -a
-        shell: wslbash
+      - run: ls /mnt
       # - name: Cache wxWidgets
       #   id: wxwidgets-cache
       #   uses: actions/cache@v2
