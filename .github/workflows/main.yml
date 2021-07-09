@@ -9,7 +9,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - run: |
-          wget https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.4/wxWidgets-3.1.4.zip
+          curl -LO https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.4/wxWidgets-3.1.4.zip
           unzip wxWidgets-3.1.4.zip -d wxWidgets
           sed -i -r -e 's/wxUSE_POSTSCRIPT +0/wxUSE_POSTSCRIPT 1/' $PWD/wxWidgets/include/wx/msw/setup.h
           sed -i -r -e 's/wxUSE_WEBVIEW_EDGE +0/wxUSE_WEBVIEW_EDGE 1/' $PWD/wxWidgets/include/wx/msw/setup.h
