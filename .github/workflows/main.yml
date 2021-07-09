@@ -28,7 +28,7 @@ jobs:
           cd cache
           touch a
           touch b
-        - if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
 
       # - name: Cache wxWidgets
       #   id: wxwidgets-cache
