@@ -8,7 +8,7 @@ jobs:
       - run: echo $SHELL
         shell: bash
       - run: echo $SHELL
-        shell: wslbash
-      - run: echo $SHELL
-      - run: echo %SHELL%
-        shell: cmd
+        shell: C:\Windows\System32\bash.exe
+      - run: make -v
+        shell: bash
+      - run: make -v
