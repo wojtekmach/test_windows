@@ -4,11 +4,6 @@ on:
 jobs:
   test:
     runs-on: windows-latest
-    # defaults:
-    #   run:
-    #     shell: bash
-    # env:
-    #   WXWIDGETS_VERSION: 3.1.4
     defaults:
       run:
         shell: wsl-bash {0}
@@ -21,8 +16,9 @@ jobs:
         id: cache
         with:
           path: cache
-          key: cache-v1
+          key: cache-v2
       - run: ls -la
+      - run: echo "cache-hit=${{ steps.cache.outputs.cache-hit != 'true' }}"
       - run: |
           mkdir cache
           cd cache
