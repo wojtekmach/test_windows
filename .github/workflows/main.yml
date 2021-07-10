@@ -8,6 +8,7 @@ jobs:
       run:
         shell: wsl-bash {0}
     steps:
+      - run: ls -la
       - uses: Vampire/setup-wsl@v1
       - run: ls -la
       - uses: actions/checkout@v2
@@ -17,14 +18,15 @@ jobs:
         with:
           path: cache
           key: cache-v2
-      - run: ls -la
       - run: echo "cache-hit=${{ steps.cache.outputs.cache-hit != 'true' }}"
       - run: |
           mkdir cache
           cd cache
-          touch a
-          touch b
+          touch a.txt
+          touch b.txt
         if: steps.cache.outputs.cache-hit != 'true'
+      - run: ls -la
+      - run: ls -la cache
 
       # - name: Cache wxWidgets
       #   id: wxwidgets-cache
