@@ -10,19 +10,17 @@ jobs:
     steps:
       - uses: Vampire/setup-wsl@v1
       - run: ls -la
-      - uses: actions/checkout@v2
-      - run: ls -la
       - uses: actions/cache@v2
         id: cache
         with:
           path: cache
-          key: cache-v2
-      - run: echo "cache-hit=${{ steps.cache.outputs.cache-hit }}"
+          key: cache-v3
       - run: |
           mkdir cache
           cd cache
           touch a.txt
           touch b.txt
+          touch c.txt
         if: steps.cache.outputs.cache-hit != 'true'
       - run: ls -la
       - run: ls -la cache
