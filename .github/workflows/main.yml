@@ -17,7 +17,7 @@ jobs:
         with:
           path: cache
           key: cache-v2
-      - run: echo "cache-hit=${{ steps.cache.outputs.cache-hit != 'true' }}"
+      - run: echo "cache-hit=${{ steps.cache.outputs.cache-hit }}"
       - run: |
           mkdir cache
           cd cache
