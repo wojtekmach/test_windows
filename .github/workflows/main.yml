@@ -15,12 +15,12 @@ jobs:
         with:
           path: cache
           key: cache-v3
-      - run: |
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: |
           mkdir cache
           cd cache
           touch a.txt
           touch b.txt
           touch c.txt
-        if: steps.cache.outputs.cache-hit != 'true'
       - run: ls -la
       - run: ls -la cache
